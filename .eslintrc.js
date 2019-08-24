@@ -11,7 +11,8 @@ module.exports = {
   rules: {
     eqeqeq: 1,
     indent: [1, 2],
-    semi: [1, 'never'],
+    semi: [0],
+    'comma-dangle': [0, 'always'],
     'no-alert': 1,
     'no-console': 1,
     'default-case': 1,
@@ -25,7 +26,7 @@ module.exports = {
     'array-bracket-spacing': [1, 'never'],
     'array-element-newline': [1, 'consistent'],
     'object-curly-newline': 1,
-    'object-curly-spacing': [1, 'never'],
+    'object-curly-spacing': [1, 'always'],
     'object-property-newline': 1,
     'block-spacing': [1, 'never'],
     'space-infix-ops': 1,
