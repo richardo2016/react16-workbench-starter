@@ -1,0 +1,43 @@
+const reactVersion = require('react').version
+
+module.exports = {
+  extends: [
+    'eslint:recommended',
+    require.resolve('eslint-config-react-app'),
+  ],
+  settings: {
+    react: {version: reactVersion},
+  },
+  rules: {
+    eqeqeq: 1,
+    indent: [1, 2],
+    semi: [1, 'never'],
+    'no-alert': 1,
+    'no-console': 1,
+    'default-case': 1,
+    'comma-dangle': [1, 'always-multiline'],
+    'no-multi-spaces': [1, {ignoreEOLComments: false}],
+    'no-unused-vars': [1, {ignoreRestSiblings: true}],
+    'comma-spacing': [1, {before: false, after: true}],
+    'comma-dangle': [1, 'always-multiline'],
+    'semi-spacing': [1, {before: false, after: true}],
+    'array-bracket-newline': 1,
+    'array-bracket-spacing': [1, 'never'],
+    'array-element-newline': [1, 'consistent'],
+    'object-curly-newline': 1,
+    'object-curly-spacing': [1, 'never'],
+    'object-property-newline': 1,
+    'block-spacing': [1, 'never'],
+    'space-infix-ops': 1,
+    'space-unary-ops': [1, {'words': true, 'nonwords': false}],
+    'space-in-parens': [1, 'never'],
+    'space-before-blocks': 1,
+    'space-before-function-paren': [1, {'anonymous': 'always', 'named': 'never', 'asyncArrow': 'always'}],
+    'key-spacing': 1,
+    'keyword-spacing': 1,
+    'no-trailing-spaces': 1,
+    'react/prop-types': 1,
+    'react/display-name': 0,
+    'react/prop-types': [0, {ignore: ['form', 'match', 'location', 'history']}],
+  },
+}
