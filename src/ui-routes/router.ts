@@ -1,10 +1,16 @@
+/// <reference path="router.d.ts" />
+
 import { withRouter } from "react-router-dom";
 
-import * as Routes from "./";
+import * as Routes from ".";
 
 import { ensurePrefix } from "../utils/string";
 
-export const ROUTE_CONFIG = {
+export const ROUTE_CONFIG: {
+  defaultActive: string;
+  defaultOpeneds: string[];
+  menus: MenuItemChildNode['menus']
+} = {
   defaultActive: "svc+component",
   defaultOpeneds: ["svc+component"],
   menus: [
@@ -56,14 +62,20 @@ export const ROUTE_CONFIG = {
   ]
 };
 
-export function routeHasChildren(menu_item) {
+export function routeHasChildren(menu_item: MenuItem) {
   return Array.isArray(menu_item.children) && menu_item.children.length;
 }
 
 export function walkOnMenus(
-  menus,
-  mapper,
-  opts = {
+  menus: MenuItemChildNode['menus'],
+  mapper: Function,
+  opts: {
+    index_levels: number[],
+    node_levels: MenuItem[],
+    orig_parent: MenuItem | null,
+    mapped_parent: MenuItem | null,
+    root: MenuItem | null,
+  } = {
     index_levels: [],
     node_levels: [],
     orig_parent: null,
@@ -91,23 +103,23 @@ export function walkOnMenus(
     new_opts.mapped_parent = mapper(menu_item, new_opts)
 
     if (routeHasChildren(menu_item))
-      menu_item.children.forEach((child_menu_item) => {
+      (menu_item.children || []).forEach((child_menu_item: MenuItemChildNode) => {
         return walkOnMenus(child_menu_item.menus, mapper, new_opts);
       });
   });
 }
 
-export function computePath(menu_item) {
-  return menu_item.to || menu_item.path || ensurePrefix(menu_item.index);
+export function computePath(menu_item: MenuItem) {
+  return menu_item.to || /* menu_item.path ||  */ensurePrefix(menu_item.index);
 }
 
-export function computeMenuAnchorSelector(index_path) {
+export function computeMenuAnchorSelector(index_path: string) {
   return `J_app-sideber-anchor__${index_path}`;
 }
 
-const flattendPathMenus = [];
+const flattendPathMenus: FlattendMenuItem[] = [];
 
-walkOnMenus(ROUTE_CONFIG.menus, menu_item => {
+walkOnMenus(ROUTE_CONFIG.menus, (menu_item: MenuItem) => {
   if (routeHasChildren(menu_item)) return;
 
   flattendPathMenus.push({
