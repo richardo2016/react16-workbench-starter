@@ -11,10 +11,16 @@ export function generateStoreManager() {
     </StateContext.Provider>
   );
   const useCtxState = () => useContext(StateContext);
+  const attach = (Target, { state, reducer }) => (
+    () => (
+      <StateProvider initialState={state} reducer={reducer}>
+        <Target />
+      </StateProvider>
+    )
+  )
 
   return {
-    StateContext,
-    StateProvider,
+    attach,
     useCtxState,
   };
 }

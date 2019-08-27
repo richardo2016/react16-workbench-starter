@@ -1,8 +1,8 @@
 import { generateStoreManager } from "./react-helpers/store";
 
-const { StateContext, StateProvider, useCtxState } = generateStoreManager();
+const { attach, useCtxState } = generateStoreManager();
 
-const noOp = () => undefined
+// const noOp = () => undefined
 
 const initialState = {
   sidebarCollapsed: false
@@ -22,4 +22,5 @@ const reducer: React.Reducer<typeof initialState, any> = (state, action) => {
 
 const computer = {};
 
-export { StateContext, StateProvider, useCtxState, initialState, reducer, computer };
+export const connect = (Target: React.Component | React.FunctionComponent) => attach(Target, { state: initialState, reducer })
+export { useCtxState, computer };

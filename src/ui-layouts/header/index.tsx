@@ -7,8 +7,7 @@ import { useCtxState } from '@/App.store';
 /**
  * @global_state
  */
-export default ({
-}) => {
+export default () => {
   const [{
     sidebarCollapsed = false
   }, dispatch] = useCtxState()

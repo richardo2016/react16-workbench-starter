@@ -1,19 +1,9 @@
 import { generateStoreManager } from "@/react-helpers/store";
 
-const { StateContext, StateProvider, useCtxState } = generateStoreManager();
+const { attach, useCtxState } = generateStoreManager();
 
 const START_PAGE_NUM = 1;
 const noOp = () => undefined
-
-const forceInteger = (input, defaultValue = 10) => {
-  const formattedValue = parseInt(input, 10)
-
-  // eslint-disable-next-line
-  if (isNaN(formattedValue))
-    return defaultValue
-
-  return formattedValue
-}
 
 const initialState = {
   list: [],
@@ -39,7 +29,7 @@ const initialState = {
   // just for test [NEW_MATERIAL_INFO]
 };
 
-const reducer = (state, action) => {
+const reducer: React.Reducer<typeof initialState, any> = (state, action) => {
   switch (action.type) {
     default:
       return state;
@@ -47,5 +37,6 @@ const reducer = (state, action) => {
 };
 
 const computer = {};
+export const connect = (Target: React.Component | React.FunctionComponent) => attach(Target, { state: initialState, reducer })
 
-export { StateContext, StateProvider, useCtxState, initialState, reducer, computer };
+export { useCtxState, computer };
