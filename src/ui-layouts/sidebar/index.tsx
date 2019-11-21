@@ -84,20 +84,25 @@ export default ({
               }
             >
               {children.map((child_route_cfg, idx_l1_group) => {
+                const childItems = child_route_cfg.menus.map((child_item, idx_l2) => {
+                  return (
+                    <Menu.Item
+                      key={`item-${child_item.index}-pidx-${idx_l0}-group-${idx_l1_group}/${idx_l2}`}
+                    >
+                      {getNavLinkNode(child_item)}
+                    </Menu.Item>
+                  )
+                })
+
+                if (!child_route_cfg.group)
+                  return childItems;
+                
                 return (
                   <Menu.ItemGroup
                     key={`item-${child_item.index}-pidx-${idx_l0}-group-${idx_l1_group}`}
                     title={child_route_cfg.group}
                   >
-                    {child_route_cfg.menus.map((child_item, idx_l2) => {
-                      return (
-                        <Menu.Item
-                          key={`item-${child_item.index}-pidx-${idx_l0}-group-${idx_l1_group}/${idx_l2}`}
-                        >
-                          {getNavLinkNode(child_item)}
-                        </Menu.Item>
-                      )
-                    })}
+                    {childItems}
                   </Menu.ItemGroup>
                 )
               })}
