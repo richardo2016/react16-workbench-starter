@@ -2,7 +2,7 @@ import React from 'react'
 import { HashRouter as Router, Route } from "react-router-dom";
 
 import { Layout } from 'antd';
-import { StateProvider, initialState, reducer, useCtxState } from './App.store';
+import { connect, useCtxState } from './App.store';
 
 import Sidebar from './ui-layouts/sidebar';
 import Header from './ui-layouts/header';
@@ -44,8 +44,4 @@ const App = () => {
   )
 }
 
-export default () => (
-  <StateProvider initialState={initialState} reducer={reducer}>
-    <App />
-  </StateProvider>
-)
+export default connect(App)
