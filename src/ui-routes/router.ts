@@ -7,11 +7,13 @@ import * as Routes from ".";
 import { ensurePrefix } from "../utils/string";
 
 export const ROUTE_CONFIG: {
-  defaultActive: string;
-  defaultOpeneds: string[];
+  defaultPathname?: string;
+  defaultActive?: string;
+  defaultOpeneds?: string[];
   menus: MenuItemChildNode['menus']
 } = {
-  defaultActive: "svc+component",
+  defaultPathname: undefined,
+  defaultActive: "svc-list",
   defaultOpeneds: ["svc+component"],
   menus: [
     {
@@ -100,6 +102,9 @@ export function walkOnMenus(
       root: _root,
     };
 
+    if (ROUTE_CONFIG.defaultActive && menu_item.index === ROUTE_CONFIG.defaultActive)
+      ROUTE_CONFIG.defaultPathname = menu_item.to
+
     new_opts.mapped_parent = mapper(menu_item, new_opts)
 
     if (routeHasChildren(menu_item))
@@ -115,6 +120,12 @@ export function computePath(menu_item: MenuItem) {
 
 export function computeMenuAnchorSelector(index_path: string) {
   return `J_app-sideber-anchor__${index_path}`;
+}
+
+export function findMatchedIndex(pathname: string) {
+  const route = flattendPathMenus.find(x => x.path === pathname)
+
+  return route ? route.index : null
 }
 
 const flattendPathMenus: FlattendMenuItem[] = [];
