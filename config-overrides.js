@@ -18,5 +18,22 @@ module.exports = override(
   }),
   addWebpackAlias({
     '@': path.resolve(__dirname, 'src'),
-  })
+  }),
+  (config) => {
+    if (process.env.BUNDLE_STANDALONE) {
+      config.optimization.runtimeChunk = false;
+      config.optimization.splitChunks = {
+        cacheGroups: {
+          default: false,
+        },
+      };
+      // JS
+      config.output.filename = 'static/js/[name].js';
+      // CSS. "5" is MiniCssPlugin
+      config.plugins[5].options.filename = 'static/css/[name].css';
+      config.plugins[5].options.moduleFilename = () => 'static/css/[name].css';
+    }
+
+    return config
+  }
 );
