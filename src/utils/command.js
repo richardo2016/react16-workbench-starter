@@ -21,7 +21,7 @@ export function copyToClipboard (node = null) {
   try {
     // Now that we've selected the anchor text, execute the copy command
     successful = document.execCommand('copy')
-  } catch(err) {
+  } catch (err) {
     successful = false
   }
   clearSelection()

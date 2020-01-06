@@ -33,7 +33,7 @@ module.exports = {
     'space-unary-ops': [1, {'words': true, 'nonwords': false}],
     'space-in-parens': [1, 'never'],
     'space-before-blocks': 1,
-    'space-before-function-paren': [1, {'anonymous': 'always', 'named': 'never', 'asyncArrow': 'always'}],
+    'space-before-function-paren': [1, {'anonymous': 'never', 'named': 'always', 'asyncArrow': 'never'}],
     'key-spacing': 1,
     'keyword-spacing': 1,
     'no-trailing-spaces': 1,
