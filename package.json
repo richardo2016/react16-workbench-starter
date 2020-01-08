@@ -21,7 +21,6 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
-    "postbuild": "rm build/service-worker.js && rm -rf build/static/**/*.LICENSE",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject"
   },
