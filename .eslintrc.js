@@ -10,7 +10,7 @@ module.exports = {
   },
   rules: {
     eqeqeq: 1,
-    indent: [1, 2],
+    indent: [1, 2, {"SwitchCase": 1}],
     semi: [0],
     'comma-dangle': [0, 'always'],
     'no-alert': 1,
